@@ -1,6 +1,6 @@
 # PA1 — ETP/1 Client and Server
 
-**Student:** James Stull (`Thepigeon0516`), Daniel Geer(`DanielGeer`)
+**Students:** James Stull (`Thepigeon0516`), Daniel Geer (`DanielGeer`)
 **Course:** CSC 4200 — Fall 2026
 **Language:** _Python_
 **Submitted commit:** _the SHA you paste into Canvas_
@@ -46,4 +46,4 @@ generative AI tool helped me produce. My use of AI tools is disclosed in full in
 `AI_USE.md`. The capture and measurements in `evidence/` come from my own programs,
 run by me.
 
-**Signed:** _James Stull, Daniel Geer_  **Date:** _11/3/2026_
+**Signed:** _James Stull, Daniel Geer._  **Date:** _11/3/2026_
