@@ -45,15 +45,23 @@ def connect(host, port):
     """Open a session to host:port; return conn."""
     raise NotImplementedError
 
-
+# Done
 def send_all(conn, data):
     """Send every byte of `data`, or raise an exception."""
-    raise NotImplementedError
+    conn.sendall(data)
 
-
+# Adapted from Chapter 5, Section 5.8 of the textbook.
 def recv_exact(conn, n):
     """Return exactly n bytes. Raise ConnectionClosed(clean=...) if the stream ends."""
-    raise NotImplementedError
+    buffer = bytearray()
+    while len(buffer) < n:
+        chunk = conn.recv(n - len(buffer))
+        if chunk == b"":
+            if not buffer:
+                return ConnectionClosed(clean=True)
+            raise ConnectionClosed(clean=False)
+        buffer.extend(chunk)
+    return bytes(buffer)
 
 
 def close(conn):
