@@ -11,6 +11,16 @@ _Paste the exact commands you ran (capture, server, client, ss), and the size of
 the file you transferred._
 
 ```
+mkdir -p server-files evidence scratch
+head -c 262144 /dev/urandom > scratch/photo.bin
+./etp-server --port 5000 --root server-files
+sudo tshark -i lo -s 200 -f "tcp port 5000" -w /tmp/pa1-capture.pcap
+C="./etp-client --host 127.0.0.1 --port 5000 --name Thepigeon0516"
+$C put scratch/photo.bin photo.bin
+$C get photo.bin scratch/copy.bin
+ss -tan state time-wait '( sport = :5000 or dport = :5000 )' > evidence/time-wait.txt
+sudo mv /tmp/pa1-capture.pcap evidence/
+sudo chown $USER evidence/pa1-capture.pcap
 ```
 
 ## Facts
@@ -23,14 +33,14 @@ the "Sequence Number (raw)" field. With tshark, add
 `etp-facts` label: a script reads this block._
 
 ```etp-facts
-server_port:
-client_port:
-client_isn:                      # raw sequence number in the client's SYN
-server_isn:                      # raw sequence number in the server's SYN/ACK
-client_mss:                      # MSS option value in the client's SYN, in bytes
-server_to_client_payload_bytes:  # all TCP payload bytes the server sent in this session (HELLO_OK + GET_OK + BYE_OK)
-server_to_client_data_segments:  # server-to-client frames with payload, across all three responses, counted as captured
-first_fin_from:                  # server or client
+server_port: 5000
+client_port: 34392
+client_isn: 1069284391           # raw sequence number in the client's SYN
+server_isn: 3606832780           # raw sequence number in the server's SYN/ACK
+client_mss: 65495                # MSS option value in the client's SYN, in bytes
+server_to_client_payload_bytes: 262189 bytes  # all TCP payload bytes the server sent in this session (HELLO_OK + GET_OK + BYE_OK)
+server_to_client_data_segments: 9 # server-to-client frames with payload, across all three responses, counted as captured
+first_fin_from: server                  # server or client
 ```
 
 ## Q1. The handshake
