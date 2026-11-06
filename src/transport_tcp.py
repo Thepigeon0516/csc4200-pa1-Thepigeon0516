@@ -37,14 +37,12 @@ def listen(bind_addr, port):
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_socket.bind((bind_addr, port))
     server_socket.listen()
-    print(f"Listening on {bind_addr}:{port}")
     return server_socket
 
 # Done
 def accept(listener):
     """Wait for the next session; return (conn, peer_address)."""
     conn, peer_address = listener.accept()
-    print(f"Accepted connection from {peer_address}")
     return conn, peer_address
 
 # Done
@@ -52,7 +50,6 @@ def connect(host, port):
     """Open a session to host:port; return conn."""
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     conn.connect((host, port))
-    print(f"Connected to {host}:{port}")
     return conn
 
 # Done
