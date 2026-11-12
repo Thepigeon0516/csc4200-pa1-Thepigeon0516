@@ -1,45 +1,47 @@
 # PA1 Design — ETP/1 Client and Server
 
-_One to two pages. Short, specific answers beat long general ones. Every section
-should be true of the code you submit. Delete these italic prompts when you write._
-
 ## 1. Architecture
 
-_Your modules and what calls what. A small diagram (ASCII is fine) or a list:
-which file holds the protocol (encode/decode), which holds the transport, which
-holds the server's session logic, which holds the client._
+etp.py has the encode/decode protocol. 
+Transport_tcp.py has the transport seam. 
+Server.py has the session logic. 
+Client.py has the client logic.
 
 ## 2. The transport seam
 
-_Which file is your transport? List the six operations as you implemented them.
-Confirm that no other file calls the socket API. In two or three sentences: what
-would you have to change, and what would stay the same, when you swap TCP for your
-PA2 transport in the final project?_
+Transport_tcp.py is the transport seam.
+ 
+The six operations that were implemented are as follows: listen, accept, connect, send_all, recv_exact, and close.
+
+No other file imports socket or calls any of the socket functions.
+
+For PA2, all the other functions should stay the same. transport_tcp.py will need to be changed to UDP and transport.py will also need to import the UDP file.
 
 ## 3. Framing
 
-_How does your code read one ETP message from a byte stream? Where and how do you
-handle a header that arrives in pieces, or two messages that arrive in one read?
-Where do you check VERSION and LENGTH, and why before reading the payload?_
+It reads a message from a byte stream by first unpacking the header which determines how many bytes will be in the payload. 
+
+A header that arrives in pieces is handled in transport_tcp.py with a while loop. This makes sure that the whole message is received and not into the next.
+ 
+VERSION and LENGTH are checked in etp.py in the read_message function. This is done before reading a payload because it needs to know if the version is valid and how many bytes to read next.
 
 ## 4. Concurrency
 
-_Threads, processes or an event loop? What happens to everyone else when one
-client stalls half-way through a header? Is any state shared between sessions
-(for example, two clients PUT and GET the same file at once), and how is it
-protected?_
+The threading module is being used so when there is a stall, it is only that specific module that is paused.
+
+There is no state shared and right now if two clients tried a PUT and a GET at the same time it would most likely cause data corruption.
 
 ## 5. Errors and disconnects
 
-_How do fatal and non-fatal errors differ in your code? What happens when a client
-disconnects in the middle of a GET of a large file? (C: how did you deal with
-SIGPIPE?) How does your client choose its exit code?_
+Non-fatal errors are handled by an ERROR message and still keeps the connection open. Fatal Errors will throw an exception which will close the connection.
+
+If a client disconnects in the middle of a large file request, Python will raise a BrokenPipeError or ConnectionResetError because that portion of the code is wrapped in a try except block.
+
+It exits 0 on success, 1 if an ERROR, 2 if anything else that went wrong: bad arguments, cannot connect, the connection ended early, a response that fails the checks above, a local file that cannot be read or written, 3  if the PUT_OK digest hash doesn’t match the SHA-256 of the data sent.   
 
 ## 6. Threat model
 
-_One paragraph. Who could attack an ETP/1 server, and how? Name one attack your
-server resists (and how), and one it does not. Chapter 5 §5.9 and the
-specification's Security Considerations are good starting points._
+Anyone connecting over the network could attack this server. This is because there is no authentication. The server resists path traversal attacks because it uses the section 7 rules. An attack that it doesn’t resist is packet tampering. An attacker could alter the payload in the middle of a send. It also doesn’t resist resource exhaustion. If someone wanted to they could overwhelm the server with PUT requests.
 
 ## 7. Testing
 
