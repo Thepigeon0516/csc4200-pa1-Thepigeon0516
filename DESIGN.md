@@ -41,7 +41,13 @@ It exits 0 on success, 1 if an ERROR, 2 if anything else that went wrong: bad ar
 
 ## 6. Threat model
 
-Anyone connecting over the network could attack this server. This is because there is no authentication. The server resists path traversal attacks because it uses the section 7 rules. An attack that it doesn’t resist is packet tampering. An attacker could alter the payload in the middle of a send. It also doesn’t resist resource exhaustion. If someone wanted to they could overwhelm the server with PUT requests.
+Anyone connecting over the network could attack this server. This is because there is no authentication. 
+
+The server resists path traversal attacks because it uses the section 7 rules. 
+
+An attack that it doesn’t resist is packet tampering. An attacker could alter the payload in the middle of a send. 
+
+It also doesn’t resist resource exhaustion. If someone wanted to they could overwhelm the server with PUT requests.
 
 ## 7. Testing
 
