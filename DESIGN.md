@@ -53,3 +53,4 @@ It also doesn’t resist resource exhaustion. If someone wanted to they could ov
 
 _What did you test beyond `etp_selfcheck.py`? How? Name one bug your testing
 found, how you found it, and the fix._
+I ran the real server and client against each other for list, get, put, a missing file, an invalid name, a symlink and a refused connection. A bug I did find was in etp.py where I raised ValueError it was never caught by client.py. The way I found it was after letting an AI look at the code it pointed out the issue. The fix was to use return version, mtype, status, length, b""
