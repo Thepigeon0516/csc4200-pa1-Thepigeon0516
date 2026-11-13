@@ -18,7 +18,9 @@ _No external dependencies were used. The project was built and tested using Pyth
 ## What works and what does not
 
 The project is fully functional and passes all tests.
+
 Execution: 30 / 30
+
 Build and repository: 10 / 10
 
 ## Files
@@ -48,4 +50,4 @@ generative AI tool helped us produce. Our use of AI tools is disclosed in full i
 `AI_USE.md`. The capture and measurements in `evidence/` come from our own programs,
 run by us.
 
-**Signed:** _James Stull, Daniel Geer._  **Date:** _11/3/2026_
+**Signed:** _James Stull, Daniel Geer._  **Date:** _11/13/2026_
