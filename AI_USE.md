@@ -8,26 +8,22 @@ answer only if it is true._
 ## 1. Did you use generative AI on this assignment?
 
 - [ ] No. I did not use any generative AI tool for any part of PA1.
-- [ ] Yes, as described below.
+- [x] Yes, as described below.
 
 ## 2. Statement (the syllabus form)
 
-> The author acknowledges the utilization of _[tool name]_, a language model
-> developed by _[provider]_, in the preparation of this assignment. _[Tool name]_
-> was employed in the following manner(s) within this assignment: _[for example:
-> explaining socket errors; reviewing my framing code; drafting the Makefile;
-> suggesting test cases; editing DESIGN.md for clarity]_.
+> The authors acknowledge the utilization of Gemini, a language model
+> developed by Google, in the preparation of this assignment. Gemini
+> was employed in the following manner(s) within this assignment: troubleshooting a tshark file write 
+> permission error, troubleshooting a VS Code Remote SSH error, 
 
 ## 3. Log
 
-_One row per substantive interaction. Summaries are fine; you do not need to paste
-whole conversations, but keep them in case you are asked._
-
 | # | What I asked (summary) | What I used from the answer | What I changed or rejected | How I checked it was right |
 |---|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-
+| 1 | I got a permission denied error when using tshark to write to the evidence folder. | The solution was to capture the file to tmp with sudo, and move it to the evidence directory with sudo mv. | Nothing | I made sure the file was in the evidence folder and could be opened with my user. |
+| 2 | VS code is stuck in a downloading server loop. | I used the command "rm -rf ~/.vscode-server" to clear the cache. | I ignored a step about checking the VM's disk space. | I ran the command in the vm terminal and was able to SSH with VS Code again. |
+| 3 |  |  |  |  |  |
 ## 4. Where AI-produced material remains
 
 _List each file and function (or document section) that still contains code or
