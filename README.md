@@ -3,7 +3,7 @@
 **Students:** James Stull (`Thepigeon0516`), Daniel Geer (`DanielGeer`)
 **Course:** CSC 4200 — Fall 2026
 **Language:** _Python_
-**Submitted commit:** _the SHA you paste into Canvas_
+**Submitted commit:** _Submitted to Canvas_
 
 ## Build and run
 
