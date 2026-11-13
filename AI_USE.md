@@ -34,21 +34,11 @@ answer only if it is true._
 
 ## 4. Where AI-produced material remains
 
-File: server.py
-Functions:
-do_get()
-do_put()
+File: server.py. Functions: do_get(), do_put()
     
-File: client.py
-Functions:
-exchange()
-write_local()
+File: client.py. Functions: exchange(), write_local()
 
-File: transport_tcp.py
-Functions:
-listen()
-connect()
-
+File: transport_tcp.py. Functions: listen(), connect()
 
 ## 5. One thing the AI got wrong — or how you checked it
 
@@ -56,4 +46,3 @@ An error in the code was in etp.py read_message() where after asking what I shou
 raise ValueError("BAD_VERSION"). The way I caught it was telling the AI the specifications for that particular section (8.1)
 
 When the AI reviewed transport_tcp.py it found a bug with my code and suggested that I remove the with block around my socket instantiations. To check if the AI was right, I ran the server and client, and sent a file across them. I ran the cmp command to make sure that both files were the same.
-
